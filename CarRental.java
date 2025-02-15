@@ -1,6 +1,6 @@
 package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
-// https://docs.oracle.com/en/java/javase/16/docs/api/java.desktop/javax/swing/JOptionPane.html
+// https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JOptionPane.html
 
 public class CarRental {
 	public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class CarRental {
 		String carName = "Null";
 		
 		int carChoice = 0;
-		while (carChoice <= 0 || carChoice >= 4) {
+		while (carChoice <= 0 || carChoice >= 4) { // loops until the user picks a valid option, https://www.w3schools.com/java/java_while_loop.asp
 			String carType = JOptionPane.showInputDialog(null,
 			             "Choose a car type.\n1. Compact, $30.50 per day\n2. Sedan, $50.00 per day\n3. SUV, $80.96 per day\nPlease input the number only.", "Car type selection",
 			             JOptionPane.QUESTION_MESSAGE);
@@ -20,7 +20,7 @@ public class CarRental {
 		
 		
 		int rentalChoice = 0;
-		while (rentalChoice <= 0 || rentalChoice >= 4) {
+		while (rentalChoice <= 0 || rentalChoice >= 4) { // loops until the user picks a valid option
 			String rentalLength = JOptionPane.showInputDialog(null,
 			             "Choose rental duration.\n1. Daily, no discount\n2. Weekly, 15% discount\n3. Monthly, 30% discount", "rental duration selection.",
 			             JOptionPane.QUESTION_MESSAGE);
@@ -52,7 +52,7 @@ public class CarRental {
 		priceWeekly = priceDaily * 7;
 		priceMonthly = priceDaily * 30;
 		
-		priceDaily = (priceDaily * 100.00);
+		priceDaily = (priceDaily * 100.00); // this array of code rounds off to 2 decimal places
 		priceDaily = Math.round(priceDaily);
 		priceDaily = (priceDaily / 100.00);
 		
@@ -64,12 +64,12 @@ public class CarRental {
 		priceMonthly = Math.round(priceMonthly);
 		priceMonthly = (priceMonthly / 100.00);
 		
-		if (rental == 1.0) {
+		if (rental == 1.0) { // if the user chose daily
 			JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day.");
 		}
-		else if (rental == 0.85)
+		else if (rental == 0.85) // if the user chose weekly
 			JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day or $" + priceWeekly + " per week.");
-		else
+		else // if the user chose monthly
 			JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day or $" + priceMonthly + " per month.");
 		}
 	}
