@@ -1,6 +1,5 @@
 package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
-// https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JOptionPane.html
 
 public class CarRental {
 	public static void main(String[] args) {
@@ -8,68 +7,70 @@ public class CarRental {
 		String carName = "Null";
 		
 		int carChoice = 0;
-		while (carChoice <= 0 || carChoice >= 4) { // loops until the user picks a valid option, https://www.w3schools.com/java/java_while_loop.asp
 			String carType = JOptionPane.showInputDialog(null,
 			             "Choose a car type.\n1. Compact, $30.50 per day\n2. Sedan, $50.00 per day\n3. SUV, $80.96 per day\nPlease input the number only.", "Car type selection",
 			             JOptionPane.QUESTION_MESSAGE);
 			carChoice = Integer.parseInt(carType);
 			if (carChoice <= 0 || carChoice >= 4) {
-				JOptionPane.showMessageDialog(null, "Error, invalid car type");
-			}	
-		}
+				JOptionPane.showMessageDialog(null, "Error, invalid car type.");
+				return;
+			}
 		
 		
 		int rentalChoice = 0;
-		while (rentalChoice <= 0 || rentalChoice >= 4) { // loops until the user picks a valid option
 			String rentalLength = JOptionPane.showInputDialog(null,
 			             "Choose rental duration.\n1. Daily, no discount\n2. Weekly, 15% discount\n3. Monthly, 30% discount", "rental duration selection.",
 			             JOptionPane.QUESTION_MESSAGE);
 			rentalChoice = Integer.parseInt(rentalLength);
 			if (rentalChoice <= 0 || rentalChoice >= 4) {
-				JOptionPane.showMessageDialog(null, "Error, invalid duration length");
+				JOptionPane.showMessageDialog(null, "Error, invalid duration length.");
+				return;
 			}
-		}
+			
 		switch (carChoice) {
-		case 1: car = 30.50;
+		case 1:
+		car = 30.50;
 		carName = "Compact";
 		break;
-		case 2: car = 50.00;
+		case 2:
+		car = 50.00;
 		carName = "Sedan";
 		break;
-		case 3: car = 80.96;
+		case 3:
+		car = 80.96;
 		carName = "SUV";
-		break;}
+		break;
+		}
 		
 		switch (rentalChoice) {
-		case 1: rental = 1.0;
+		case 1:
+		rental = 1.0;
 		break;
-		case 2: rental = 0.85;
+		case 2:
+		rental = 0.85;
 		break;
-		case 3: rental = 0.70;
+		case 3:
+		rental = 0.70;
 		break;}
 		
-		priceDaily = car * rental;
-		priceWeekly = priceDaily * 7;
-		priceMonthly = priceDaily * 30;
+		priceDaily = Math.round(car * rental * 100.0) / 100.0;
+		int display = (int)(rental * 100); // "switch" does not support double variables
 		
-		priceDaily = (priceDaily * 100.00); // this array of code rounds off to 2 decimal places
-		priceDaily = Math.round(priceDaily);
-		priceDaily = (priceDaily / 100.00);
+		switch (display) {
+		case 100:  // if the user chose daily
+				JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day.");
+		break;
 		
-		priceWeekly = (priceWeekly * 100.00);
-		priceWeekly = Math.round(priceWeekly);
-		priceWeekly = (priceWeekly / 100.00);
+		case 85: // if the user chose weekly
+				priceWeekly = Math.round(car * rental * 7 * 100.0) / 100.0;
+				JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day or $" + priceWeekly + " per week.");
+		break;
 		
-		priceMonthly = (priceMonthly * 100.00);
-		priceMonthly = Math.round(priceMonthly);
-		priceMonthly = (priceMonthly / 100.00);
+		case 70: // if the user chose monthly
+				priceMonthly = Math.round(car * rental * 30 * 100.0) / 100.0;
+				JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day or $" + priceMonthly + " per month.");
+		break;
 		
-		if (rental == 1.0) { // if the user chose daily
-			JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day.");
-		}
-		else if (rental == 0.85) // if the user chose weekly
-			JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day or $" + priceWeekly + " per week.");
-		else // if the user chose monthly
-			JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day or $" + priceMonthly + " per month.");
 		}
 	}
+}
