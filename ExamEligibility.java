@@ -1,19 +1,26 @@
 package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
+//https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JOptionPane.html
+
 
 public class ExamEligibility {
 	public static void main(String[] args) {
+		double classNum = 0, classesAttended = 1;
 		
 		String classSum = JOptionPane.showInputDialog(null,
 	             "How many classes are there in total?", "Class total input.",
 	             JOptionPane.QUESTION_MESSAGE);
-		double classNum = Integer.parseInt(classSum);
+		classNum = Integer.parseInt(classSum);
 		
 		String classAttendance = JOptionPane.showInputDialog(null,
 	             "How many classes did you attend?", "Class attendance input.",
 	             JOptionPane.QUESTION_MESSAGE);
-		double classesAttended = Integer.parseInt(classAttendance);
-		
+		classesAttended = Integer.parseInt(classAttendance);
+		if (classNum < classesAttended) {
+			JOptionPane.showMessageDialog(null, "Error, number of classes attended cannot be higher than number of classes total.");
+			return;
+			}
+
 		String assignment1 = JOptionPane.showInputDialog(null,
 	             "Score for assignment 1? (out of 100%)", "Assignment 1 score score input.",
 	             JOptionPane.QUESTION_MESSAGE);
@@ -38,6 +45,4 @@ public class ExamEligibility {
 			JOptionPane.showMessageDialog(null, "Unfortunately, you are not eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: 75%\nMinimum assignment score: 50%");
 		else
 			JOptionPane.showMessageDialog(null, "Congrats, you are eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: 75%\nMinimum assignment total: 50%");	
-	}
-
-}
+	}}
