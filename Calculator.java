@@ -1,30 +1,13 @@
 package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
-// https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JOptionPane.html
 
 public class Calculator {
 	public static void main(String [] args) {
 		double value1 = 0, value2 = 0, answer = 0;	
 		 Object[] operations = { "Addition", "Subtraction", "Multiplication", "Division", "Remainder" };
-		/* this code declares an array of "objects" with the object type being "string"
-		 this array stores the "strings" in an index starting from the value "0"
-		 the array name is "operations" and will store the strings listed above
-		 with respect to its positional value as the index value.
-		 */
 		 int selectedOperator = JOptionPane.showOptionDialog(null, "Select an operation", "Calculator", 
 				 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, operations, null);
-		 /* this code uses JOptionPane to display an options dialog using
-		 showOptionDialog. This displays the user a set of choices in a dialog box.
-		 it is more preferable as it prevents the user from typing invalid inputs.
-		 the 4th arguments optionType is replaced by the specified "operations" array
-		 the 7th argument specifies the array to be used
-		 the 8th argument specifies the default selected value, null means there will be no
-		 default value
-		 
-		 selectedOperator will store the index value of the selected option as an
-		 integer value
-		 if the dialogue box is closed, the integer value will be "-1"
-		 */
+
 		 
 		 String value1Selection = JOptionPane.showInputDialog("Enter the first value.");
 		 String value2Selection = JOptionPane.showInputDialog("Enter the second value.");
@@ -63,7 +46,24 @@ public class Calculator {
 			 answer = value1 % value2;
 			 JOptionPane.showMessageDialog(null, value1 + " % " + value2 + " = " + answer);
 		 break;
-		 }
-
+		 	}
 		 }
 	}
+/*
+https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JOptionPane.html
+from line 8 to 10
+this code declares an array of "objects" with the object type being "string"
+this array stores the "strings" in an index starting from the value "0"
+the array name is "operations" and will store the strings listed above
+with respect to its positional value as the index value.
+This code uses JOptionPane to display an options dialog using
+showOptionDialog. This displays the user a set of choices in a dialog box.
+It is more preferable as it prevents the user from typing invalid inputs.
+The 4th arguments optionType is replaced by the specified "operations" array
+The 7th argument specifies the array to be used
+The 8th argument specifies the default selected value, null means there will be no
+default value.
+selectedOperator will store the index value of the selected option as an
+integer value from 0 till 4.
+If the dialogue box is closed by the user, the integer value will be "-1".
+*/
