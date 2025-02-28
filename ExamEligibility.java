@@ -36,6 +36,11 @@ public class ExamEligibility {
 	             JOptionPane.QUESTION_MESSAGE);
 		int asmt3 = Integer.parseInt(assignment3);
 		
+		if (asmt1 > 100 || asmt2 > 100 || asmt3 > 100) {
+			JOptionPane.showMessageDialog(null, "Error, assignment score cannot be higher than 100.");
+			return;
+			}
+		
 		
 		int assignmentTotal = ((asmt1 + asmt2 + asmt3) / 3);
 		int attendanceTotal = (int)((classesAttended / classNum) * 100); // using type-casting so there are no decimals
