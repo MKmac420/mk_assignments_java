@@ -54,9 +54,9 @@ public class CarRental {
 		break;}
 		
 		priceDaily = Math.round(car * rental * 100.0) / 100.0;
-		int display = (int)(rental * 100); // "switch" does not support double variables
+		int priceResult = (int)(rental * 100); // "switch" does not support "double" variables
 		
-		switch (display) {
+		switch (priceResult) {
 		case 100:  // if the user chose daily
 				JOptionPane.showMessageDialog(null, "Price for " + carName + " type car is $" + priceDaily + " per day.");
 		break;
