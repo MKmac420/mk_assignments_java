@@ -1,6 +1,4 @@
-package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
-
 public class ExamEligibility {
 	public static void main(String[] args) {
 		double classNum = 0, classesAttended = 0;
