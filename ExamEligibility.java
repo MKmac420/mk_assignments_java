@@ -1,11 +1,10 @@
 package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
-//https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JOptionPane.html
-
 
 public class ExamEligibility {
 	public static void main(String[] args) {
-		double classNum = 0, classesAttended = 1;
+		double classNum = 0, classesAttended = 0;
+		final byte MINIMUM_ATTENDANCE = 75, MINIMUM_ASSIGNMENT_SCORE = 50;
 		
 		String classSum = JOptionPane.showInputDialog(null,
 	             "How many classes are there in total?", "Class total input.",
@@ -40,14 +39,17 @@ public class ExamEligibility {
 			JOptionPane.showMessageDialog(null, "Error, assignment score cannot be higher than 100.");
 			return;
 			}
-		
+		else if (asmt1 < 0 || asmt2 < 0 || asmt3 < 0) {
+			JOptionPane.showMessageDialog(null, "Error, assignment score cannot be lower than 0.");
+			return;
+		}
 		
 		int assignmentTotal = ((asmt1 + asmt2 + asmt3) / 3);
 		int attendanceTotal = (int)((classesAttended / classNum) * 100); // using type-casting so there are no decimals
 				
-		
-		if (assignmentTotal < 50.0 || attendanceTotal < 75.0)
-			JOptionPane.showMessageDialog(null, "Unfortunately, you are not eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: 75%\nMinimum assignment score: 50%");
+		if (assignmentTotal < MINIMUM_ASSIGNMENT_SCORE || attendanceTotal < MINIMUM_ATTENDANCE)
+			JOptionPane.showMessageDialog(null, "Unfortunately, you are not eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: " + MINIMUM_ATTENDANCE + "%\nMinimum assignment total: " + MINIMUM_ASSIGNMENT_SCORE + "%");
 		else
-			JOptionPane.showMessageDialog(null, "Congrats, you are eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: 75%\nMinimum assignment total: 50%");	
-	}}
+			JOptionPane.showMessageDialog(null, "Congrats, you are eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: " + MINIMUM_ATTENDANCE + "%\nMinimum assignment total: " + MINIMUM_ASSIGNMENT_SCORE + "%");	
+		}
+	}
