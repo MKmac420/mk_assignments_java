@@ -1,6 +1,4 @@
-package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
-
 public class Calculator {
 	public static void main(String [] args) {
 		double value1 = 0, value2 = 0, answer = 0;	
@@ -8,7 +6,6 @@ public class Calculator {
 		 int selectedOperator = JOptionPane.showOptionDialog(null, "Select an operation", "Calculator", 
 				 JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, operations, null);
 
-		 
 		 String value1Selection = JOptionPane.showInputDialog("Enter the first value.");
 		 String value2Selection = JOptionPane.showInputDialog("Enter the second value.");
 		 
@@ -22,7 +19,6 @@ public class Calculator {
 		 else if (selectedOperator == -1) {
 			 JOptionPane.showMessageDialog(null, "Error, no operation was chosen.");
 			 return;
- 
 		 }
 		 
 		 switch (selectedOperator) {
@@ -46,12 +42,13 @@ public class Calculator {
 			 answer = value1 % value2;
 			 JOptionPane.showMessageDialog(null, value1 + " % " + value2 + " = " + answer);
 		 break;
-		 	}
+		 }
 		 }
 	}
+
 /*
 https://docs.oracle.com/en/java/javase/17/docs/api/java.desktop/javax/swing/JOptionPane.html
-from line 8 to 10
+from line 8 to 10 in this code
 this code declares an array of "objects" with the object type being "string"
 this array stores the "strings" in an index starting from the value "0"
 the array name is "operations" and will store the strings listed above
@@ -59,7 +56,7 @@ with respect to its positional value as the index value.
 This code uses JOptionPane to display an options dialog using
 showOptionDialog. This displays the user a set of choices in a dialog box.
 It is more preferable as it prevents the user from typing invalid inputs.
-The 4th arguments optionType is replaced by the specified "operations" array
+The 4th argument's optionType is replaced by the specified "operations" array
 The 7th argument specifies the array to be used
 The 8th argument specifies the default selected value, null means there will be no
 default value.
