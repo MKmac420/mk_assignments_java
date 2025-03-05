@@ -1,5 +1,4 @@
 import javax.swing.JOptionPane;
-
 public class Calculator {
     public static void main(String[] args) {
         double value1 = 0, value2 = 0, answer = 0;
