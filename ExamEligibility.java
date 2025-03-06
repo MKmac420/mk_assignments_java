@@ -41,7 +41,7 @@ public class ExamEligibility {
 			JOptionPane.showMessageDialog(null, "Error, assignment score cannot be lower than 0.");
 			return;
 		}
-		
+
 		int assignmentTotal = (asmt1 + asmt2 + asmt3);
 		int attendanceTotal = (int)((classesAttended / classNum) * 100); // using type-casting so there are no decimals
 				
