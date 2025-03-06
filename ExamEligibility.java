@@ -1,8 +1,10 @@
+package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
+
 public class ExamEligibility {
 	public static void main(String[] args) {
 		double classNum = 0, classesAttended = 0;
-		final byte MINIMUM_ATTENDANCE = 75, MINIMUM_ASSIGNMENT_SCORE = 50;
+		String eligibilityMessage;
 		
 		String classSum = JOptionPane.showInputDialog(null,
 	             "How many classes are there in total?", "Class total input.",
@@ -19,7 +21,7 @@ public class ExamEligibility {
 			}
 
 		String assignment1 = JOptionPane.showInputDialog(null,
-	             "Score for assignment 1? (out of 100%)", "Assignment 1 score score input.",
+	             "Score for assignment 1? (out of 100%)", "Assignment 1 score input.",
 	             JOptionPane.QUESTION_MESSAGE);
 		int asmt1 = Integer.parseInt(assignment1);
 		
@@ -42,12 +44,14 @@ public class ExamEligibility {
 			return;
 		}
 		
-		int assignmentTotal = ((asmt1 + asmt2 + asmt3) / 3);
+		int assignmentTotal = (asmt1 + asmt2 + asmt3);
 		int attendanceTotal = (int)((classesAttended / classNum) * 100); // using type-casting so there are no decimals
 				
-		if (assignmentTotal < MINIMUM_ASSIGNMENT_SCORE || attendanceTotal < MINIMUM_ATTENDANCE)
-			JOptionPane.showMessageDialog(null, "Unfortunately, you are not eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: " + MINIMUM_ATTENDANCE + "%\nMinimum assignment total: " + MINIMUM_ASSIGNMENT_SCORE + "%");
+		if (asmt1 + asmt2 + asmt3 >= 150 || attendanceTotal >= 50)
+			eligibilityMessage = "Congratulations, you are";
 		else
-			JOptionPane.showMessageDialog(null, "Congrats, you are eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: " + MINIMUM_ATTENDANCE + "%\nMinimum assignment total: " + MINIMUM_ASSIGNMENT_SCORE + "%");	
-		}
+			eligibilityMessage = "Congratulations, you are not";
+		JOptionPane.showMessageDialog(null, eligibilityMessage + " eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: " + "75%\nMinimum assignment total: " + "150%");
+
+	}
 	}
