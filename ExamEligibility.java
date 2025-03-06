@@ -48,7 +48,7 @@ public class ExamEligibility {
 		if (asmt1 + asmt2 + asmt3 >= 150 || attendanceTotal >= 50)
 			eligibilityMessage = "Congratulations, you are";
 		else
-			eligibilityMessage = "Congratulations, you are not";
+			eligibilityMessage = "Unfortunately, you are not";
 		JOptionPane.showMessageDialog(null, eligibilityMessage + " eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: " + "75%\nMinimum assignment total: " + "150%");
 		}
 	}
