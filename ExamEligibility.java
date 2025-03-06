@@ -1,6 +1,4 @@
-package pcse002_assignment_solo;
 import javax.swing.JOptionPane;
-
 public class ExamEligibility {
 	public static void main(String[] args) {
 		double classNum = 0, classesAttended = 0;
@@ -52,6 +50,5 @@ public class ExamEligibility {
 		else
 			eligibilityMessage = "Congratulations, you are not";
 		JOptionPane.showMessageDialog(null, eligibilityMessage + " eligible for the exam.\nAttendance: " + attendanceTotal + "%\nAssignment total: " + assignmentTotal + "%\nMinimum attendance: " + "75%\nMinimum assignment total: " + "150%");
-
-	}
+		}
 	}
