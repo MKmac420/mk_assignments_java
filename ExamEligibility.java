@@ -45,7 +45,7 @@ public class ExamEligibility {
 		int assignmentTotal = (asmt1 + asmt2 + asmt3);
 		int attendanceTotal = (int)((classesAttended / classNum) * 100); // using type-casting so there are no decimals
 				
-		if (asmt1 + asmt2 + asmt3 >= 150 || attendanceTotal >= 50)
+		if (asmt1 + asmt2 + asmt3 >= 150 && attendanceTotal >= 50)
 			eligibilityMessage = "Congratulations, you are";
 		else
 			eligibilityMessage = "Unfortunately, you are not";
