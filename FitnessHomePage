@@ -1,0 +1,150 @@
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.*;
+
+public class FitnessHomePage extends JFrame {
+
+    FitnessHomePage() {
+        setTitle("21Fitness");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel mainTitleLabel = new JLabel("21Fitness - Home");
+        mainTitleLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+        titlePanel.add(mainTitleLabel);
+        add(titlePanel, BorderLayout.NORTH);
+
+        JPanel centerPanel = new JPanel(new GridLayout(0, 1, 10, 15));
+
+        JPanel upcomingClassesCard = new JPanel(new BorderLayout(5, 5));
+        upcomingClassesCard.setBorder(new LineBorder(Color.LIGHT_GRAY));
+
+        JPanel upcomingTopPanel = new JPanel(new GridLayout(0, 1));
+        JLabel upcomingNewLabel = new JLabel("  New");
+        upcomingNewLabel.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        upcomingNewLabel.setForeground(Color.GRAY);
+        JLabel upcomingTitleLabel = new JLabel("  Upcoming classes");
+        upcomingTitleLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+        upcomingTopPanel.add(upcomingNewLabel);
+        upcomingTopPanel.add(upcomingTitleLabel);
+        upcomingClassesCard.add(upcomingTopPanel, BorderLayout.NORTH);
+
+        JPanel classesListPanel = new JPanel(new GridLayout(0, 1, 0, 5));
+
+        JPanel item1 = new JPanel(new GridLayout(0,1));
+        JLabel zumbaLabel = new JLabel("    Zumba");
+        zumbaLabel.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        item1.add(zumbaLabel);
+        JLabel zumbaTimeLabel = new JLabel("    Wed, 9 Apr 8.00AM");
+        zumbaTimeLabel.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        item1.add(zumbaTimeLabel);
+        classesListPanel.add(item1);
+
+        JPanel item2 = new JPanel(new GridLayout(0,1));
+        JLabel yogaLabel = new JLabel("    Yoga");
+        yogaLabel.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        item2.add(yogaLabel);
+        JLabel yogaTimeLabel = new JLabel("    Tue, 10 Apr 9.00AM");
+        yogaTimeLabel.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        item2.add(yogaTimeLabel);
+        classesListPanel.add(item2);
+
+        JPanel item3 = new JPanel(new GridLayout(0,1));
+        JLabel flexLabel = new JLabel("    Flex");
+        flexLabel.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        item3.add(flexLabel);
+        JLabel flexTimeLabel = new JLabel("    Fri, 11 Apr 10.00AM");
+        flexTimeLabel.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        item3.add(flexTimeLabel);
+        classesListPanel.add(item3);
+
+        upcomingClassesCard.add(classesListPanel, BorderLayout.CENTER);
+        centerPanel.add(upcomingClassesCard);
+
+        JPanel promotionsCard = new JPanel(new BorderLayout(5, 5));
+        promotionsCard.setBorder(new LineBorder(Color.LIGHT_GRAY));
+
+        JPanel promoTopPanel = new JPanel(new GridLayout(0, 1));
+        JLabel promoNewLabel = new JLabel("  New");
+        promoNewLabel.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        promoNewLabel.setForeground(Color.GRAY);
+        JLabel promoTitleLabel = new JLabel("  Latest Promotions");
+        promoTitleLabel.setFont(new Font("SansSerif", Font.BOLD, 16));
+        promoTopPanel.add(promoNewLabel);
+        promoTopPanel.add(promoTitleLabel);
+        promotionsCard.add(promoTopPanel, BorderLayout.NORTH);
+
+        JPanel promoListPanel = new JPanel(new GridLayout(0, 1, 0, 10));
+
+        JPanel promo1 = new JPanel(new GridLayout(0,1));
+        JLabel promo1DescLabel = new JLabel("    Register for 12 months and get 2 extra months for free!");
+        promo1DescLabel.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        promo1.add(promo1DescLabel);
+        JLabel promo1ExpiryLabel = new JLabel("    Offer expires June 14th 2025");
+        promo1ExpiryLabel.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        promo1.add(promo1ExpiryLabel);
+        promoListPanel.add(promo1);
+
+        JPanel promo2 = new JPanel(new GridLayout(0,1));
+        JLabel promo2DescLabel = new JLabel("    Buy 2 gym sessions and get 1 for free!");
+        promo2DescLabel.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        promo2.add(promo2DescLabel);
+        JLabel promo2ExpiryLabel = new JLabel("    Offer expires July 14th 2025");
+        promo2ExpiryLabel.setFont(new Font("SansSerif", Font.PLAIN, 11));
+        promo2.add(promo2ExpiryLabel);
+        promoListPanel.add(promo2);
+
+        promotionsCard.add(promoListPanel, BorderLayout.CENTER);
+        centerPanel.add(promotionsCard);
+
+        centerPanel.add(new JSeparator());
+
+        add(centerPanel, BorderLayout.CENTER);
+
+        JPanel navPanel = new JPanel(new GridLayout(1, 5));
+        navPanel.setBorder(new LineBorder(Color.LIGHT_GRAY));
+
+        ImageIcon homeIcon = new ImageIcon("C:/Users/hp/Desktop/javajava/home.png");
+        JButton homeButton = new JButton("Home", homeIcon);
+        homeButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        homeButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        homeButton.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        navPanel.add(homeButton);
+
+        ImageIcon bookIcon = new ImageIcon("C:/Users/hp/Desktop/javajava/book.png");
+        JButton bookButton = new JButton("Book", bookIcon);
+        bookButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        bookButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        bookButton.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        navPanel.add(bookButton);
+
+        ImageIcon buyIcon = new ImageIcon("C:/Users/hp/Desktop/javajava/buy.png");
+        JButton buyButton = new JButton("Buy", buyIcon);
+        buyButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        buyButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        buyButton.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        navPanel.add(buyButton);
+
+        ImageIcon classesIcon = new ImageIcon("C:/Users/hp/Desktop/javajava/classes.png");
+        JButton classesButton = new JButton("Classes", classesIcon);
+        classesButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        classesButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        classesButton.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        navPanel.add(classesButton);
+
+        ImageIcon profileIcon = new ImageIcon("C:/Users/hp/Desktop/javajava/profile.png");
+        JButton profileButton = new JButton("Profile", profileIcon);
+        profileButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        profileButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        profileButton.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        navPanel.add(profileButton);
+
+        add(navPanel, BorderLayout.SOUTH);
+    }
+
+    public static void main(String[] args) {
+        FitnessHomePage frame = new FitnessHomePage();
+        frame.setSize(390, 700);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
