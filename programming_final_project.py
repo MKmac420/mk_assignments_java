@@ -2,8 +2,16 @@ open("students.txt", "a").close()
 open("courses.txt", "a").close()
 open("grades.txt", "a").close()
 
+
 def add_student():
     student_id = input("Enter Student ID: ")
+
+    with open("students.txt", "r") as f:
+        for line in f:
+            if line.startswith(f"{student_id},"):
+                print("Error: This Student ID already exists.")
+                return
+
     student_name = input("Enter Student Name: ")
 
     while True:
@@ -11,12 +19,56 @@ def add_student():
         if student_email.endswith("@gmail.com"):
             break
         else:
-            print(" This email is invalid. Please enter a valid Email address.")
+            print("This email is invalid. Please enter a valid Email address.")
 
     with open("students.txt", "a") as f:
         f.write(f"{student_id},{student_name},{student_email}\n")
 
     print("Student added successfully!\n")
+
+
+def modify_student():
+    student_id = input("Enter Student ID to modify: ")
+    lines = []
+    found = False
+
+    with open("students.txt", "r") as f:
+        lines = f.readlines()
+
+    with open("students.txt", "w") as f:
+        for line in lines:
+            data = line.strip().split(",")
+            
+            if data[0] == student_id:
+                found = True
+                current_name = data[1]
+                current_email = data[2]
+                
+                print(f"Current Name:  {current_name}")
+                new_name = input("Enter New Name (or press Enter to keep): ")
+                if new_name == "": 
+                    new_name = current_name
+
+                while True:
+                    print(f"Current Email: {current_email}")
+                    new_email = input("Enter New Email (or press Enter to keep): ")
+                    
+                    if new_email == "":
+                        new_email = current_email
+                        break
+                    elif new_email.endswith("@gmail.com"):
+                        break
+                    else:
+                        print("This email is invalid. Please enter a valid Email address.")
+
+                f.write(f"{student_id},{new_name},{new_email}\n")
+                print("Student details updated successfully.\n")
+            
+            else:
+                f.write(line)
+
+    if not found:
+        print("Student ID not found.\n")
 
 
 def remove_student():
@@ -53,12 +105,53 @@ def remove_student():
 
 def add_course():
     course_id = input("Enter Course ID: ")
+
+    with open("courses.txt", "r") as f:
+        for line in f:
+            if line.startswith(f"{course_id},"):
+                print("Error: This Course ID already exists.")
+                return
+
     course_name = input("Enter Course Name: ")
 
     with open("courses.txt","a") as f:
         f.write(f"{course_id},{course_name}\n")
 
     print("Course added successfully!\n")
+
+
+def modify_course():
+    course_id = input("Enter Course ID to modify: ")
+    lines = []
+    found = False
+
+    with open("courses.txt", "r") as f:
+        lines = f.readlines()
+
+    with open("courses.txt", "w") as f:
+        for line in lines:
+            if not line.strip():
+                continue
+            data = line.strip().split(",")
+            
+            if data[0] == course_id:
+                found = True
+                current_name = data[1]
+                
+                print(f"Current Course Name: {current_name}")
+                new_name = input("Enter New Name (or press Enter to keep): ")
+                
+                if new_name == "": 
+                    new_name = current_name
+
+                f.write(f"{course_id},{new_name}\n")
+                print("Course name updated successfully.\n")
+            
+            else:
+                f.write(line)
+
+    if not found:
+        print("Course ID not found.\n")
 
 
 def remove_course():
@@ -96,12 +189,34 @@ def remove_course():
 
 
 def record_marks():
-    student_id = input("Enter Your Student ID: ")
-    course_id = input("Enter Your Course ID: ")
+    student_id = input("Enter Student ID: ")
+    course_id = input("Enter Course ID: ")
+
+    student_exists = False
+    with open("students.txt", "r") as f:
+        for line in f:
+            if line.startswith(f"{student_id},"):
+                student_exists = True
+                break
+    
+    if not student_exists:
+        print("Error: Student ID not found.")
+        return
+
+    course_exists = False
+    with open("courses.txt", "r") as f:
+        for line in f:
+            if line.startswith(f"{course_id},"):
+                course_exists = True
+                break
+
+    if not course_exists:
+        print("Error: Course ID not found.")
+        return
 
     while True:
         try:
-            student_marks = float(input("Enter Your Marks: "))
+            student_marks = float(input("Enter Marks: "))
             if 0 <= student_marks <= 100:
                 break
             else:
@@ -109,45 +224,63 @@ def record_marks():
         except ValueError:
                 print("Please Enter Numbers That Is Valid.")
 
-    if student_marks >= 80:
-        course_grade = "A+"
-    elif student_marks >= 75:
-        course_grade = "A"
-    elif student_marks >= 70:
-        course_grade = "B+"
-    elif student_marks >= 65:
-        course_grade = "B"
-    elif student_marks >= 60:
-        course_grade = "B-"
-    elif student_marks >= 55:
-        course_grade = "C+"
-    elif student_marks >= 50:
-        course_grade = "C"
-    else:
-        course_grade = "F"
+    if student_marks >= 80: course_grade = "A+"
+    elif student_marks >= 75: course_grade = "A"
+    elif student_marks >= 70: course_grade = "B+"
+    elif student_marks >= 65: course_grade = "B"
+    elif student_marks >= 60: course_grade = "B-"
+    elif student_marks >= 55: course_grade = "C+"
+    elif student_marks >= 50: course_grade = "C"
+    else: course_grade = "F"
 
-    with open("grades.txt", "a") as f:
-        f.write(f"{student_id},{course_id},{student_marks},{course_grade}\n")
-    print(f"Marks Have Been Successfully Recorded! Grade: {course_grade}\n")
+    new_record = f"{student_id},{course_id},{student_marks},{course_grade}\n"
+    
+    lines = []
+
+    with open("grades.txt", "r") as f:
+        lines = f.readlines()
+
+    found = False
+    
+    with open("grades.txt", "w") as f:
+        for line in lines:
+            if not line.strip():
+                continue
+            data = line.strip().split(",")
+            
+            if data[0] == student_id and data[1] == course_id:
+                f.write(new_record)
+                found = True
+                print(f"Marks Have Been Successfully Updated! Grade: {course_grade}.\n")
+            else:
+                f.write(line)
+        
+        if not found:
+            f.write(new_record)
+            print(f"Marks Have Been Successfully Recorded! Grade: {course_grade}\n")
+            
+    print(f"Grade assigned: {course_grade}\n")
 
 
 def display_student_performance():
     student_id = input("Enter Student ID: ")
     student_name = ""
     student_email = ""
+    found_student = False
     found_grades = False
     
     with open("students.txt", "r") as f:
         for line in f:
-            if not line.strip(): continue
+            if not line.strip():
+                continue
             data = line.strip().split(",")
             if data[0] == student_id:
                 student_name = data[1]
                 student_email = data[2]
-                found_grades = True
+                found_student = True
                 break 
 
-    if not found_grades:
+    if not found_student:
         print("\nError, student does not exist.")
         return
 
@@ -161,17 +294,14 @@ def display_student_performance():
     print(f"{'Course ID':<15} | {'Marks':<8} | {'Grade':<5}") # < alligns the text and pads with spaces, quotation mark gave error idk why
     print("----------------------------------------")
 
-    try:
-        with open("grades.txt", "r") as grades_file:
-            for line in grades_file:
-                if not line.strip(): continue
-                data = line.strip().split(",")
+    with open("grades.txt", "r") as grades_file:
+        for line in grades_file:
+            if not line.strip(): continue
+            data = line.strip().split(",")
 
-                if data[0] == student_id:
-                    print(f"{data[1]:<15} | {data[2]:<8} | {data[3]:<5}")
-                    found_grades = True
-    except FileNotFoundError:
-        print("No grades recorded.")
+            if data[0] == student_id:
+                print(f"{data[1]:<15} | {data[2]:<8} | {data[3]:<5}")
+                found_grades = True
 
     if not found_grades:
         print("\nStudent has no grades.")
@@ -230,21 +360,36 @@ def export_performance_report():
     student_id = input("Enter Student ID to export: ")
     student_name = ""
     student_email = ""
-    
+    found_student = False
 
     with open("students.txt", "r") as f:
         for line in f:
             if not line.strip(): continue
             data = line.strip().split(",")
-            # Check if this is the student we want
             if data[0] == student_id:
                 student_name = data[1]
                 student_email = data[2]
+                found_student = True
                 break 
 
-    filename = f"report_{student_id}.txt"
-    found_grades = False
+    if not found_student:
+        print("Student ID entered is incorrect or does not exist.")
+        return
 
+    student_grades = []
+    with open("grades.txt", "r") as f:
+        for line in f:
+            if not line.strip(): continue
+            data = line.strip().split(",")
+            if data[0] == student_id:
+                student_grades.append(data)
+
+    if not student_grades:
+        print("This student has no grades recorded yet. No report generated.")
+        return
+
+    filename = f"report_{student_id}.txt"
+    
     with open(filename, "w") as export_file:
         export_file.write("========================================\n")
         export_file.write("          PERFORMANCE REPORT            \n")
@@ -256,57 +401,88 @@ def export_performance_report():
         export_file.write(f"{'Course ID':<15} | {'Marks':<8} | {'Grade':<5}\n")
         export_file.write("----------------------------------------\n")
 
-        with open("grades.txt", "r") as grades_file:
-            for line in grades_file:
-                if not line.strip(): continue
-                data = line.strip().split(",")
-
-                if data[0] == student_id:
-                    export_file.write(f"{data[1]:<15} | {data[2]:<8} | {data[3]:<5}\n")
-                    found_grades = True
-
-        if not found_grades:
-            export_file.write("\nStudent has no grades.\n")
+        for data in student_grades:
+            export_file.write(f"{data[1]:<15} | {data[2]:<8} | {data[3]:<5}\n")
             
         export_file.write("========================================\n")
     
     print(f"Success! Report saved as {filename}.\n")
 
 
+def manage_students():
+    while True:
+        print("\n=== Manage Students ===")
+        print("|1. Add Student       |")
+        print("|2. Modify Student    |")
+        print("|3. Remove Student    |")
+        print("|4. Back to Main Menu |")
+        print("=======================")
+        
+        choice = input("Enter option: ")
+        
+        match choice:
+            case "1":
+                add_student()
+            case "2":
+                modify_student()
+            case "3":
+                remove_student()
+            case "4":
+                return
+            case _:
+                print("Invalid Choice. Please Pick A Valid Option.")
+
+
+def manage_courses():
+    while True:
+        print("\n=== Manage Courses ===")
+        print("|1. Add Course        |")
+        print("|2. Modify Course     |")
+        print("|3. Remove Course     |")
+        print("|4. Back to Main Menu |")
+        print("======================")
+        
+        choice = input("Enter option: ")
+        
+        match choice:
+            case "1":
+                add_course()
+            case "2":
+                modify_course()
+            case "3":
+                remove_course()
+            case "4":
+                return
+            case _:
+                print("Invalid Choice. Please Pick A Valid Option.")
+
 while True:
     print("\n========= Main Menu =========")
-    print("|1. Add Student               |")
-    print("|2. Remove Student            |")
-    print("|3. Add Course                |")
-    print("|4. Remove Course             |")
-    print("|5. Record Marks              |")
-    print("|6. See student performance   |")
-    print("|7. Display course summary    |")
-    print("|8. Export student performance|")
-    print("|9. Exit                      |")
+    print("|1. Manage Students           |")
+    print("|2. Manage Courses            |")
+    print("|3. Record Marks              |")
+    print("|4. See student performance   |")
+    print("|5. Display course summary    |")
+    print("|6. Export student performance|")
+    print("|7. Exit                      |")
     print("===============================")
 
     choice = input("Enter your option: ")
 
     match choice:
-        
         case "1":
-            add_student()
+            manage_students()
         case "2":
-            remove_student()
+            manage_courses()
         case "3":
-            add_course()
-        case "4":
-            remove_course()
-        case "5":
             record_marks()
-        case "6":
+        case "4":
             display_student_performance()
-        case "7":
+        case "5":
             display_course_summary()
-        case "8":
+        case "6":
             export_performance_report()
-        case "9":
+        case "7":
             print("Goodbye!")
             break
         case _:
