@@ -225,12 +225,18 @@ def record_marks():
                 print("Please Enter Numbers That Is Valid.")
 
     if student_marks >= 80: course_grade = "A+"
-    elif student_marks >= 75: course_grade = "A"
-    elif student_marks >= 70: course_grade = "B+"
-    elif student_marks >= 65: course_grade = "B"
-    elif student_marks >= 60: course_grade = "B-"
-    elif student_marks >= 55: course_grade = "C+"
-    elif student_marks >= 50: course_grade = "C"
+    elif student_marks >= 75:
+        course_grade = "A"
+    elif student_marks >= 70:
+        course_grade = "B+"
+    elif student_marks >= 65:
+        course_grade = "B"
+    elif student_marks >= 60:
+        course_grade = "B-"
+    elif student_marks >= 55:
+        course_grade = "C+"
+    elif student_marks >= 50:
+        course_grade = "C"
     else: course_grade = "F"
 
     new_record = f"{student_id},{course_id},{student_marks},{course_grade}\n"
