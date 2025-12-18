@@ -2,21 +2,34 @@ open("students.txt", "a").close()
 open("courses.txt", "a").close()
 open("grades.txt", "a").close()
 
+import re
+
+def valid_name(name):
+    return bool(re.fullmatch(r"[A-Za-z .'/\-]+", name))
 
 def add_student():
-    student_id = input("Enter Student ID: ")
+    while True:
+        student_id_input = input("Enter Student ID: ").strip()
 
+        if student_id_input.isdigit():
+            student_id = int(student_id_input)
+            break
+        else:
+            print("Invalid Student ID. Please enter numbers only.")
     with open("students.txt", "r") as f:
         for line in f:
             if line.startswith(f"{student_id},"):
                 print("Error: This Student ID already exists.")
                 return
-
-    student_name = input("Enter Student Name: ")
-
     while True:
-        student_email = input("Enter Email: ")
-        if student_email.endswith("@gmail.com"):
+        student_name = input("Enter Student Name: ").strip()
+        if valid_name(student_name):
+            break
+        else:
+            print("Invalid Name")
+    while True:
+        student_email = input("Enter Email: ").strip().lower()
+        if student_email.endswith("@imail.sunway.edu.my")and student_email !="@imail.sunway.edu.my":
             break
         else:
             print("This email is invalid. Please enter a valid Email address.")
@@ -25,7 +38,6 @@ def add_student():
         f.write(f"{student_id},{student_name},{student_email}\n")
 
     print("Student added successfully!\n")
-
 
 def modify_student():
     student_id = input("Enter Student ID to modify: ")
@@ -38,25 +50,30 @@ def modify_student():
     with open("students.txt", "w") as f:
         for line in lines:
             data = line.strip().split(",")
-            
             if data[0] == student_id:
                 found = True
                 current_name = data[1]
                 current_email = data[2]
-                
-                print(f"Current Name:  {current_name}")
-                new_name = input("Enter New Name (or press Enter to keep): ")
-                if new_name == "": 
-                    new_name = current_name
+                while True:
+                    print(f"Current Name: {current_name}")
+                    new_name = input("Enter New Name (or press Enter to keep): ").strip()
+
+                    if new_name == "":
+                        new_name = current_name
+                        break
+                    elif valid_name(new_name):
+                        break
+                    else:
+                        print("Invalid Name")
 
                 while True:
                     print(f"Current Email: {current_email}")
-                    new_email = input("Enter New Email (or press Enter to keep): ")
+                    new_email = input("Enter New Email (or press Enter to keep): ").strip().lower()
                     
                     if new_email == "":
                         new_email = current_email
                         break
-                    elif new_email.endswith("@gmail.com"):
+                    elif new_email.endswith("@imail.sunway.edu.my")and new_email !="@imail.sunway.edu.my":
                         break
                     else:
                         print("This email is invalid. Please enter a valid Email address.")
@@ -319,6 +336,7 @@ def display_course_summary():
     course_id = input("Enter course ID: ")
     marks_list = []
     course_name = ""
+    found_course= False
 
     with open("courses.txt", "r") as f:
         for line in f:
@@ -327,6 +345,9 @@ def display_course_summary():
             if data[0] == course_id:
                 course_name = data[1]
                 break
+    if not found_course:
+        print("\nError, course does not exist.")
+        return
     
     print("==================================")
     print(f" COURSE: {course_name} ({course_id})")
