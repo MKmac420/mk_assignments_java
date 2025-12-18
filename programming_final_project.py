@@ -344,6 +344,7 @@ def display_course_summary():
             data = line.strip().split(",")
             if data[0] == course_id:
                 course_name = data[1]
+                found_course = True
                 break
     if not found_course:
         print("\nError, course does not exist.")
